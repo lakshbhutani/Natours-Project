@@ -1,0 +1,3 @@
+Express middleware:
+1)It is the function which is executed between request and response.
+2)Everything is middleware(even routers).
