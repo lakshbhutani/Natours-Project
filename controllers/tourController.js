@@ -3,7 +3,7 @@ const fs = require('fs');
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
 );
-console.log(tours)
+// console.log(tours)
 
 exports.checkID = (req, res, next, val) => {
   if (req.params.id*1 > tours.length) {
