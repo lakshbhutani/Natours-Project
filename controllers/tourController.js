@@ -19,7 +19,7 @@ exports.getToursList = async (req, res) => {
 
     // // 2) Sorting
     if (req.query.sort) {
-      query = query.sort(req.query.sort);
+      query = query.sort('price');
       // sort('price ratingAverage')
     } else {
       query = query.sort('-createdAt');
@@ -29,11 +29,28 @@ exports.getToursList = async (req, res) => {
     if (req.query.fields) {
       query = query.select('name');
     } else {
-      query = query.select('-_v');
+      query = query.select('-__v');
     }
+
+    //  4) Pagination
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 100;
+    const skip = (page - 1) * limit;
+
+    // page=2&limit=10, 1- 10, 11-20
+    query = query.skip(skip).limit(limit);
 
     // Execute Query
     const tours = await query;
+    // const tours = await Tour.find(
+    //   JSON.parse(queryString),
+    //   ['price', 'duration'],
+    //   {
+    //     sort: {
+    //       price: 1
+    //     }
+    //   }
+    // );
 
     res.status(200).json({
       status: 'success',
