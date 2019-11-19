@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon server.js",
-    "start:prod": "NODE_ENV=production nodemon server.js"
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "debug": "ndb server.js",
+    "debug:prod": "ndb NODE_ENV=production server.js"
   },
   "author": "lakshbhutani",
   "license": "ISC",
