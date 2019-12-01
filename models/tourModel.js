@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
-const validator = require('validator');
+// const validator = require('validator');
 
-const tourSchema = mongoose.Schema(
+const tourSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -79,7 +79,32 @@ const tourSchema = mongoose.Schema(
     secretTour: {
       type: Boolean,
       default: false
-    }
+    },
+    startLocation: {
+      // GeoJson
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point']
+      },
+      coordinates: [Number],
+      address: String,
+      description: String
+    },
+    // By specifying an array of objects,it will create a brand new doc in a parent doc.
+    locations: [
+      {
+        type: {
+          type: String,
+          default: 'Point',
+          enum: ['Point']
+        },
+        coordinates: [Number],
+        address: String,
+        description: String,
+        day: Number
+      }
+    ]
   },
   {
     toJSON: { virtuals: true },

@@ -44,4 +44,3 @@ server.on('unhandledRejection', err => {
     process.exit(1);
   });
 });
-
