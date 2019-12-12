@@ -4,13 +4,13 @@ const dotenv = require('dotenv');
 const Tour = require('../../models/tourModel');
 
 dotenv.config({ path: './config.env' });
-// const DB = process.env.DATABASE.replace(
-//   '<PASSWORD>',
-//   process.env.DATABASE_PASSWORD
-// );
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
 
 mongoose
-  .connect('mongodb+srv://lakshbhutani:codes1234@@cluster0-6sywb.mongodb.net/natours?retryWrites=true&w=majority', {
+  .connect(DB, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: true
@@ -23,9 +23,7 @@ mongoose
     console.log(err);
   });
 
-const tours = JSON.parse(
-  fs.readFileSync(`${__dirname}/tours-simple.json`, 'utf8')
-);
+const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf8'));
 console.log(tours);
 
 // Importing data to DB
@@ -43,6 +41,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Tour.deleteMany({});
+    console.log('Data Deleted successfully');
   } catch (error) {
     console.log(error);
   }
