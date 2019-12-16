@@ -22,7 +22,7 @@ exports.updateOne = Model =>
     });
 
     if (!doc) {
-      return next(new AppError(`No documet found with that id`, 404));
+      return next(new AppError(`No document found with that id`, 404));
     }
 
     res.status(200).json({
@@ -68,6 +68,7 @@ exports.getAll = Model =>
       .sort()
       .limitingFields()
       .pagination();
+    // const tours = await features.query.explain();
     const tours = await features.query;
     res.status(200).json({
       status: 'success',
